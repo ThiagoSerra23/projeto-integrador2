@@ -1,0 +1,16 @@
+<nav style="padding: 15px; background: #111; color: white; display: flex; justify-content: space-between; align-items: center;">
+    <div style="font-size: 22px; font-weight: bold;">TedCar</div>
+
+    <div>
+        <a href="/" style="color: white; margin-right: 20px;">Início</a>
+        <a href="/cars" style="color: white; margin-right: 20px;">Carros</a>
+
+        {% if current_user.is_authenticated %}
+            <a href="/my_reservations" style="color: white; margin-right: 20px;">Minhas Reservas</a>
+            <a href="/logout" style="color: #ff5555;">Sair</a>
+        {% else %}
+            <a href="/login" style="color: white; margin-right: 20px;">Entrar</a>
+            <a href="/register" style="color: white;">Registrar</a>
+        {% endif %}
+    </div>
+</nav>

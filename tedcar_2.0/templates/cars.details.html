@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ car.brand }} {{ car.model }}</h1>
+
+<div style="display:flex; gap:40px;">
+
+    <!-- FOTO DO CARRO -->
+    <div>
+        <img src="{{ car.image_url }}" width="400px" style="border-radius: 10px;">
+    </div>
+
+    <!-- INFO + FORM -->
+    <div>
+        <h2>Preço: R$ {{ car.price_per_day }} / dia</h2>
+
+        <h3>Fazer reserva</h3>
+
+        <form method="POST" action="/reserve/{{ car.id }}">
+            <label>Data de início:</label><br>
+            <input type="date" name="start_date" required><br><br>
+
+            <label>Data de fim:</label><br>
+            <input type="date" name="end_date" required><br><br>
+
+            <button type="submit" style="padding:10px 20px; background:#111; color:white;">
+                Reservar
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

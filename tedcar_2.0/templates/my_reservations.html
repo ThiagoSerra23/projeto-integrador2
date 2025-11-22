@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Minhas Reservas</h1>
+
+{% if reservations|length == 0 %}
+    <p>Você ainda não tem reservas.</p>
+{% endif %}
+
+{% for r in reservations %}
+<div style="border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:8px;">
+    
+    <h3>Reserva #{{ r.id }}</h3>
+    <p><strong>Carro ID:</strong> {{ r.car_id }}</p>
+    <p><strong>Início:</strong> {{ r.start_date }}</p>
+    <p><strong>Fim:</strong> {{ r.end_date }}</p>
+    <p><strong>Total:</strong> R$ {{ r.total_price }}</p>
+
+    <a href="/cancel_reservation/{{ r.id }}"
+       style="background:#ff4444; padding:8px 15px; color:white; text-decoration:none; border-radius:6px;">
+        Cancelar Reserva
+    </a>
+
+</div>
+{% endfor %}
+
+{% endblock %}

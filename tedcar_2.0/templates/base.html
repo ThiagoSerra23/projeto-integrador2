@@ -1,43 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TedCar 2.0 - Aluguel de Veículos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <title>TedCar</title>
 </head>
 <body>
-    <nav class="fade-in">
-        <div class="logo">TedCar 2.0</div>
-        <div class="nav-links">
-            <a href="{{ url_for('cars') }}">Frota</a>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}">Sair</a>
-            {% else %}
-                <a href="{{ url_for('login') }}">Login</a>
-                <a href="{{ url_for('register') }}">Cadastro</a>
-            {% endif %}
-        </div>
-    </nav>
 
-    <div class="container fade-in">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash {{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+    {% include 'navbar.html' %}
 
+    <div style="padding: 20px;">
         {% block content %}{% endblock %}
     </div>
 
-    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    {% block scripts %}{% endblock %}
+    {% include 'footer.html' %}
+
 </body>
 </html>

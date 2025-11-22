@@ -1,32 +1,62 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div style="text-align: center; margin-bottom: 2rem;">
-    <h1 class="animate-glow"
-        style="font-size: 3rem; color: var(--primary-color); text-transform: uppercase; letter-spacing: 5px;">Frota
-        Exclusiva</h1>
-    <p style="color: var(--accent-color); font-size: 1.2rem;">Escolha sua máquina para o futuro.</p>
-</div>
 
-<div class="carousel-container fade-in">
-    <div class="carousel-track">
-        {% for car in cars %}
-        <div class="car-card">
-            <img src="{{ car.image_url }}" alt="{{ car.brand }} {{ car.model }}" class="car-image">
-            <div class="car-info">
-                <h3>{{ car.brand }} {{ car.model }}</h3>
-                <p>R$ {{ car.price_per_day }} / dia</p>
-                <button class="btn" style="margin-top: 1rem; width: auto;">Alugar Agora</button>
-            </div>
-        </div>
-        {% endfor %}
+<h1>Carros Disponíveis</h1>
+
+<!-- Filtros -->
+<form method="GET" style="margin-bottom: 20px; display: flex; gap: 20px;">
+
+    <!-- Filtro de Marca -->
+    <div>
+        <label>Marca:</label>
+        <select name="brand">
+            <option value="Todas">Todas</option>
+            {% for b in brands %}
+            <option value="{{ b }}">{{ b }}</option>
+            {% endfor %}
+        </select>
     </div>
-    <button class="carousel-btn prev-btn">&#10094;</button>
-    <button class="carousel-btn next-btn">&#10095;</button>
+
+    <!-- Filtro de Preço -->
+    <div>
+        <label>Preço máximo (R$ por dia):</label>
+        <input type="number" name="max_price" min="0" step="10">
+    </div>
+
+    <!-- Ordenação -->
+    <div>
+        <label>Ordenar:</label>
+        <select name="order">
+            <option value="">Padrão</option>
+            <option value="menor_preco">Menor preço</option>
+            <option value="maior_preco">Maior preço</option>
+        </select>
+    </div>
+
+    <button type="submit" style="padding: 5px 10px; background:#333; color:white;">Aplicar</button>
+
+</form>
+
+<!-- Cards de Carros -->
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for car in cars %}
+    <div style="border: 1px solid #ddd; width: 250px; padding: 10px; border-radius: 8px;">
+        <img src="{{ car.image_url }}" width="100%" style="border-radius: 8px;">
+        
+        <h3>{{ car.brand }} {{ car.model }}</h3>
+        <p><strong>R$ {{ car.price_per_day }}</strong> / dia</p>
+
+        <a href="/car/{{ car.id }}" style="background: #111; color: white; padding: 8px 12px; display: inline-block; text-decoration: none;">
+            Ver detalhes
+        </a>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
 
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
-{% endblock %}
+
+
+
+

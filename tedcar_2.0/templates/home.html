@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Bem-vindo à TedCar</h1>
+    <p>Alugue carros de forma rápida, segura e confiável.</p>
+
+    <div style="margin-top:20px;">
+        <a href="/cars" style="padding: 10px 20px; background:#111; color:white; text-decoration:none;">
+            Ver Carros
+        </a>
+    </div>
+
+    <h2 style="margin-top: 40px;">Destaques</h2>
+
+    <div style="display: flex; gap: 20px;">
+        {% for car in cars[:3] %}
+            <div style="border: 1px solid #ddd; width: 250px; padding: 10px;">
+                <img src="{{ car.image_url }}" width="100%">
+                <h3>{{ car.brand }} {{ car.model }}</h3>
+                <p>R$ {{ car.price_per_day }} / dia</p>
+                <a href="/car/{{ car.id }}">Ver detalhes</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
